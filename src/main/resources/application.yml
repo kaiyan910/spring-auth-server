@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: spring-auth-server
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/spring-auth
+    username: root
+    password: root
+    hikari:
+      connection-timeout: 10000
+      maximum-pool-size: 10
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-alias: server-key
+        key-store-password: qbssystem!
