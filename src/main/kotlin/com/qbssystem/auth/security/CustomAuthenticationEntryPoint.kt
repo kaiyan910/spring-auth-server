@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.http.MediaType
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.AuthenticationEntryPoint
+import java.time.LocalDateTime
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
@@ -22,8 +23,10 @@ class CustomAuthenticationEntryPoint: AuthenticationEntryPoint {
             .writeValue(
                 response.outputStream,
                 mapOf(
-                    "code" to "401",
-                    "message" to "unauthorized_request"
+                    "code" to "SYS-401",
+                    "message" to "unauthorized",
+                    "path" to request.contextPath,
+                    "date" to LocalDateTime.now()
                 )
             )
     }

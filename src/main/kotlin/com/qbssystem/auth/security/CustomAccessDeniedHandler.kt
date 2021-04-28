@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.http.MediaType
 import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.web.access.AccessDeniedHandler
+import java.time.LocalDateTime
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
@@ -22,8 +23,10 @@ class CustomAccessDeniedHandler : AccessDeniedHandler {
             .writeValue(
                 response.outputStream,
                 mapOf(
-                    "code" to "403",
-                    "message" to "forbidden"
+                    "code" to "SYS-403",
+                    "message" to "forbidden",
+                    "path" to request.contextPath,
+                    "date" to LocalDateTime.now()
                 )
             )
     }
